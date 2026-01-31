@@ -39,44 +39,44 @@ export default function Footer() {
                     <div>
                         <h4 className="font-bold text-sm uppercase tracking-wider mb-6">Shop</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
-                            <li><Link href="/electronics" className="hover:text-black transition-colors">Electronics</Link></li>
-                            <li><Link href="/fashion" className="hover:text-black transition-colors">Fashion</Link></li>
-                            <li><Link href="/home-garden" className="hover:text-black transition-colors">Home & Garden</Link></li>
-                            <li><Link href="/sports" className="hover:text-black transition-colors">Sports</Link></li>
-                            <li><Link href="/deals" className="hover:text-black transition-colors">Deals</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Electronics</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Fashion</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Home & Garden</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Sports</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Deals</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-bold text-sm uppercase tracking-wider mb-6">Customer Service</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
-                            <li><Link href="/contact" className="hover:text-black transition-colors">Contact Us</Link></li>
-                            <li><Link href="/help" className="hover:text-black transition-colors">Help Center</Link></li>
-                            <li><Link href="/track-order" className="hover:text-black transition-colors">Track Your Order</Link></li>
-                            <li><Link href="/returns" className="hover:text-black transition-colors">Returns & Exchanges</Link></li>
-                            <li><Link href="/size-guide" className="hover:text-black transition-colors">Size Guide</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Contact Us</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Help Center</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Track Your Order</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Returns & Exchanges</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Size Guide</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-bold text-sm uppercase tracking-wider mb-6">About</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
-                            <li><Link href="/about" className="hover:text-black transition-colors">About ShopMart</Link></li>
-                            <li><Link href="/careers" className="hover:text-black transition-colors">Careers</Link></li>
-                            <li><Link href="/press" className="hover:text-black transition-colors">Press</Link></li>
-                            <li><Link href="/investors" className="hover:text-black transition-colors">Investor Relations</Link></li>
-                            <li><Link href="/sustainability" className="hover:text-black transition-colors">Sustainability</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">About ShopMart</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Careers</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Press</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Investor Relations</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Sustainability</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-bold text-sm uppercase tracking-wider mb-6">Policies</h4>
                         <ul className="space-y-4 text-sm text-gray-500">
-                            <li><Link href="/privacy" className="hover:text-black transition-colors">Privacy Policy</Link></li>
-                            <li><Link href="/terms" className="hover:text-black transition-colors">Terms of Service</Link></li>
-                            <li><Link href="/cookies" className="hover:text-black transition-colors">Cookie Policy</Link></li>
-                            <li><Link href="/shipping" className="hover:text-black transition-colors">Shipping Policy</Link></li>
-                            <li><Link href="/refund" className="hover:text-black transition-colors">Refund Policy</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Privacy Policy</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Terms of Service</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Cookie Policy</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Shipping Policy</Link></li>
+                            <li><Link href="#" className="hover:text-black transition-colors">Refund Policy</Link></li>
                         </ul>
                     </div>
                 </div>
