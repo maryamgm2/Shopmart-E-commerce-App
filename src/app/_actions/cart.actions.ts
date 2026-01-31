@@ -1,23 +1,27 @@
 "use server"
+
 import { getUserToken } from "@/lib/auth"
 import { CheckoutValues } from "@/schema/checkout.schema" 
+import { revalidatePath } from "next/cache"
+
+const baseUrl = process.env.NEXTAUTH_URL ;
 
 export async function addToCart(productId: string) {
     const token = await getUserToken()
     if (!token) {
         throw new Error("you are not authorized to do this action")
     }
-    const response = await fetch("https://ecommerce.routemisr.com/api/v1/cart",{
+    const response = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
         method: "POST",
-        body: JSON.stringify({productId:productId}),
+        body: JSON.stringify({ productId: productId }),
         headers: {
-            token:token,
+            token: token,
             "Content-type": "application/json"
         }
     })
 
-    const data = await response.json()
-    return data
+    revalidatePath('/cart')
+    return await response.json()
 }
 
 export async function getLoggedUserCart() {
@@ -27,51 +31,50 @@ export async function getLoggedUserCart() {
         return null; 
     }
 
-    const response = await fetch("https://ecommerce.routemisr.com/api/v1/cart",{
+    const response = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
+        headers: {
+            token: token,
+            "Content-type": "application/json"
+        },
+        next: { revalidate: 0 } 
+    })
+
+    return await response.json()
+}
+
+export async function deleteCartProduct(productId: string) {
+    const token = await getUserToken()
+    if (!token) {
+        throw new Error("you are not authorized to do this action")
+    }
+    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
+        method: "DELETE",
         headers: {
             token: token,
             "Content-type": "application/json"
         }
     })
 
-    const data = await response.json()
-    return data
+    revalidatePath('/cart')
+    return await response.json()
 }
 
-export async function deleteCartProduct(productId:string) {
+export async function updateCartProductCount(productId: string, newCount: number) {
     const token = await getUserToken()
     if (!token) {
         throw new Error("you are not authorized to do this action")
     }
-    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`,{
-        method:"DELETE",
+    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
+        method: "PUT",
+        body: JSON.stringify({ count: newCount }),
         headers: {
-            token:token,
+            token: token,
             "Content-type": "application/json"
         }
     })
 
-    const data = await response.json()
-    return data
-}
-
-
-export async function updateCartProductCount(productId:string , newCount:number) {
-    const token = await getUserToken()
-    if (!token) {
-        throw new Error("you are not authorized to do this action")
-    }
-    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`,{
-        method:"PUT",
-        body:JSON.stringify({count:newCount}),
-        headers: {
-            token:token,
-            "Content-type": "application/json"
-        }
-    })
-
-    const data = await response.json()
-    return data
+    revalidatePath('/cart')
+    return await response.json()
 }
 
 export async function clearUserCart() {
@@ -79,16 +82,16 @@ export async function clearUserCart() {
     if (!token) {
         throw new Error("you must be logged in to do this action")
     }
-    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/`,{
-        method:"DELETE",
+    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/`, {
+        method: "DELETE",
         headers: {
-            token:token,
+            token: token,
             "Content-type": "application/json"
         }
     })
 
-    const data = await response.json()
-    return data
+    revalidatePath('/cart')
+    return await response.json()
 }
 
 export async function checkoutUser(formData: CheckoutValues, cartId: string) {
@@ -97,7 +100,8 @@ export async function checkoutUser(formData: CheckoutValues, cartId: string) {
         throw new Error("you are not authorized to do this action");
     }
 
-    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`, {
+
+    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${baseUrl}`, {
         method: "POST",
         headers: {
             "token": token,
@@ -108,11 +112,9 @@ export async function checkoutUser(formData: CheckoutValues, cartId: string) {
         })
     });
 
-    const data = await response.json();
-    return data;
+    return await response.json();
 }
 
-// التعديل هنا: استبدلنا any بـ CheckoutValues
 export async function createCashOrder(formData: CheckoutValues, cartId: string) {
     const token = await getUserToken(); 
     if (!token) throw new Error("Unauthorized");
@@ -128,5 +130,6 @@ export async function createCashOrder(formData: CheckoutValues, cartId: string) 
         })
     });
 
+    revalidatePath('/orders')
     return await response.json();
 }
